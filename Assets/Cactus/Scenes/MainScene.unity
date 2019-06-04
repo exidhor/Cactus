@@ -575,8 +575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1395ee508e6cd44f804df52ce69c4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _worldSize: {x: 20, y: 2}
-  _minY: -1
+  _worldSize: {x: 300, y: 15}
+  _minY: -5
   _chunkCount: 20
   _houseLibrary: []
 --- !u!4 &1759030565
