@@ -29,6 +29,62 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1450945208624430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4453940906361656}
+  m_Layer: 0
+  m_Name: DoorSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1598049691022692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4410718206876784}
+  m_Layer: 0
+  m_Name: RoofSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4410718206876784
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1598049691022692}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.32, y: 5.062, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4758836406104230}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4453940906361656
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450945208624430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.422, y: 1.093, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4758836406104230}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4758836406104230
 Transform:
   m_ObjectHideFlags: 1
@@ -38,7 +94,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4453940906361656}
+  - {fileID: 4410718206876784}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,10 +111,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea458e211dd6bc34caad3ae6a59d941b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _triggerZone: {fileID: 0}
+  _interactable: {fileID: 0}
+  _player: {fileID: 0}
+  _decor: {fileID: 0}
   _isDynamic: 0
-  _layer: 
+  _layer: house
   _centerCollider: {x: 3.33, y: 3.29}
   _sizeCollider: {x: 5.88, y: 6.6}
+  _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &114516329313770650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,6 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2c61227aaa7c047a67b803f95a60c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spots:
+  - {fileID: 4453940906361656}
+  - {fileID: 4410718206876784}
 --- !u!212 &212955601933690866
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -83,7 +83,9 @@ public class CityBuilder : MonoBehaviour
     Decor Instantiate(Decor decor, float x)
     {
         Decor d = GameObject.Instantiate(decor);
+        d.transform.parent = transform;
         d.transform.position = new Vector3(x, _yBase, _decorDepth);
+        d.Init(_random);
 
         return d;
     }

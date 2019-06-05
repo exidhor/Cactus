@@ -5,9 +5,33 @@ using Tools;
 
 public class ColliderManager : MonoSingleton<ColliderManager>
 {
+    [SerializeField]
     List<Chunk> _chunks = new List<Chunk>();
 
     Chunk _globalChunk;
+
+#if UNITY_EDITOR
+    [Header("Debug")]
+    [SerializeField] int _playerChunkPos = 0;
+    private void Update()
+    {
+        float playerX = Player.instance.collider.rect.center.x;
+
+        Chunk c = GetChunk(playerX);
+        int index = -1;
+
+        for(int i = 0; i < _chunks.Count; i++)
+        {
+            if(c == _chunks[i])
+            {
+                index = i;
+                break;
+            }
+        }
+
+        _playerChunkPos = index;
+    }
+#endif
 
     public void GenerateChunks(Vector2 worldSize, float minY, int chunkCount)
     {
@@ -72,52 +96,57 @@ public class ColliderManager : MonoSingleton<ColliderManager>
     {
         int m = Mathf.RoundToInt(range.y - range.x) / 2 + range.x;
 
-        float pd = float.MaxValue;
+        float pd = chunks[m].min.x;
         float d = chunks[m].center.x;
-        float nd = float.MinValue;
+        float nd = chunks[m].max.x;
 
-        if (m > 0)
-        {
-            pd = chunks[m - 1].center.x;
-        }
+        //if (m > 0)
+        //{
+        //    pd = chunks[m - 1].min.x;
+        //}
 
-        if (m < range.y)
-        {
-            nd = chunks[m + 1].center.x;
-        }
+        //if (m < range.y)
+        //{
+        //    nd = chunks[m + 1].max.x;
+        //}
 
-        if (pd < target && target < d)
-        {
-            float dp = target - pd;
-            float dd = d - target;
-
-            int index = dp < dd ? m - 1 : m;
-            return new Vector2i(index, index);
-        }
-
-        if (d < target && target < nd)
-        {
-            float dd = target - d;
-            float dn = nd - target;
-
-            int index = dd < dn ? m : m + 1;
-            return new Vector2i(index, index);
-        }
-
-        if (d == target)
+        if(pd <= target && target <= nd)
         {
             return new Vector2i(m, m);
         }
 
-        int o = range.y - range.x;
+        //if (pd < target && target < d)
+        //{
+        //    float dp = target - pd;
+        //    float dd = d - target;
+
+        //    int index = dp < dd ? m - 1 : m;
+        //    return new Vector2i(index, index);
+        //}
+
+        //if (d < target && target < nd)
+        //{
+        //    float dd = target - d;
+        //    float dn = nd - target;
+
+        //    int index = dd < dn ? m : m + 1;
+        //    return new Vector2i(index, index);
+        //}
+
+        //if (d == target)
+        //{
+        //    return new Vector2i(m, m);
+        //}
+
+        //int o = range.y - range.x;
 
         if (d < target)
         {
-            return new Vector2i(m, range.y);
+            return new Vector2i(m + 1, range.y);
         }
         else
         {
-            return new Vector2i(range.x, m);
+            return new Vector2i(range.x, m - 1);
         }
     }
 

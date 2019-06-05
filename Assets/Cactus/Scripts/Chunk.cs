@@ -6,6 +6,7 @@ using Tools;
 [Serializable]
 public class Chunk
 {
+    [Serializable]
     public class QuadTrees
     {
         public QuadTree<RectCollider> dynamicQT;
@@ -56,7 +57,7 @@ public class Chunk
     Rect _bounds;
 
     Dictionary<string, QuadTrees> _quadTreeDict = new Dictionary<string, QuadTrees>();
-    List<QuadTrees> _quadTreeList = new List<QuadTrees>();
+    [SerializeField] List<QuadTrees> _quadTreeList = new List<QuadTrees>();
 
     public Chunk(int index, Vector2 pos, Vector2 size)
     {
