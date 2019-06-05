@@ -17,6 +17,7 @@ public class Interactable : Collidable, ITriggerable
         _event.SetActive(false);
         _triggerZone.Init();
         _triggerZone.Register(this);
+        _collider.SetValid(false);
         _collider.RefreshCollider();
     }
 
@@ -24,6 +25,7 @@ public class Interactable : Collidable, ITriggerable
     {
         _isTrigger = true;
         _triggerZone.Unregister(this);
+        _collider.SetValid(true);
 
         _event.SetActive(true);
     }

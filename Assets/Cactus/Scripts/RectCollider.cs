@@ -58,6 +58,11 @@ public class RectCollider : ComponentBuffer, IQTClearable
                         size.y);
     }
 
+    public void SetValid(bool isValid)
+    {
+        _isValid = isValid;
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = _gizmosColor;
