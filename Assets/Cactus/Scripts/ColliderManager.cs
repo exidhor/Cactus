@@ -19,9 +19,9 @@ public class ColliderManager : MonoSingleton<ColliderManager>
         float currentX = minX;
         for (int i = 0; i < chunkCount; i++)
         {
-            Chunk district = new Chunk(i, new Vector2(currentX, minY), chunkSize);
+            Chunk chunk = new Chunk(i, new Vector2(currentX, minY), chunkSize);
 
-            _chunks.Add(district);
+            _chunks.Add(chunk);
 
             currentX += chunkSize.x;
         }
@@ -31,20 +31,22 @@ public class ColliderManager : MonoSingleton<ColliderManager>
 
     public void Register(RectCollider collider, string layer)
     {
-        int index = Peaks(collider.rect.center.x, _chunks);
+        Chunk chunk = GetChunk(collider.rect.center.x);
+        chunk.Add(collider, layer);
+    }
 
-        Chunk chunk;
+    Chunk GetChunk(float x)
+    {
+        int index = Peaks(x, _chunks);
 
-        if(index < 0)
+        if (index < 0)
         {
-            chunk = _globalChunk;
+            return _globalChunk;
         }
         else
         {
-            chunk = _chunks[index];
+            return _chunks[index];
         }
-
-        chunk.Add(collider, layer);
     }
 
     static int Peaks(float posX, List<Chunk> chunks)
@@ -119,9 +121,57 @@ public class ColliderManager : MonoSingleton<ColliderManager>
         }
     }
 
-    public void Actualize(float dt)
+    public void Clear()
     {
+        for(int i = 0; i < _chunks.Count; i++)
+        {
+            _chunks[i].Clear();
+        }
+    }
 
+    public List<RectCollider> FindCollisions(Rect rect, string layer)
+    {
+        Chunk chunk = GetChunk(rect.center.x);
+
+        List<RectCollider> found = chunk.Retrieve(rect, layer);
+        FilterCollisions(found, rect);
+
+        return found;
+    }
+
+    void FilterCollisions(List<RectCollider> colliders, Rect rect)
+    {
+        int removeIndex = -1;
+        int removeCount = 0;
+
+        for (int i = 0; i < colliders.Count; i++)
+        {
+            RectCollider c = colliders[i];
+
+            if (!c.rect.Overlaps(rect))
+            {
+                removeCount++;
+
+                if (removeIndex == -1)
+                {
+                    removeIndex = i;
+                }
+            }
+            else
+            {
+                if (removeIndex != -1)
+                {
+                    // swap with the first remove item
+                    colliders[removeIndex] = c;
+                    removeIndex++;
+                }
+            }
+        }
+
+        if (removeIndex > -1)
+        {
+            colliders.RemoveRange(removeIndex, removeCount);
+        }
     }
 
     private void OnDrawGizmosSelected()

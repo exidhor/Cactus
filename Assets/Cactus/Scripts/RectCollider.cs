@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tools;
 
-public class RectCollider : MonoBehaviour, IQTClearable
+public class RectCollider : ComponentBuffer, IQTClearable
 {
-    public new Rect rect
+    public Rect rect
     {
         get { return _rect; }
     }
@@ -24,11 +24,17 @@ public class RectCollider : MonoBehaviour, IQTClearable
     {
         get { return _isValid; }
     }
-
+    
+    [Header("Infos")]
     [SerializeField] bool _isDynamic;
     [SerializeField] string _layer;
     [SerializeField] Vector2 _centerCollider;
     [SerializeField] Vector2 _sizeCollider = Vector2.one;
+
+#if UNITY_EDITOR
+    [Header("Gizmos")]
+    [SerializeField] Color _gizmosColor = Color.blue;
+#endif
 
     bool _isValid = true;
     Rect _rect = new Rect();
@@ -59,7 +65,7 @@ public class RectCollider : MonoBehaviour, IQTClearable
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = _gizmosColor;
         Rect rect = GetCollider();
         Gizmos.DrawWireCube(rect.center, rect.size);
     }

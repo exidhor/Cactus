@@ -23,6 +23,14 @@ public class Chunk
 
             quadTree.Insert(collider, collider.rect);
         }
+
+        public List<RectCollider> Retrieve(Rect rect)
+        {
+            List<RectCollider> found = dynamicQT.Retrieve(rect);
+            found.AddRange(staticQT.Retrieve(rect));
+
+            return found;
+        }
     }
 
     public Vector2 center
@@ -71,6 +79,22 @@ public class Chunk
         }
 
         _quadTreeDict[layer].Insert(collider);
+    }
+
+    public List<RectCollider> Retrieve(Rect rect, string layer)
+    {
+        if (!_quadTreeDict.ContainsKey(layer)) return new List<RectCollider>();
+
+        QuadTrees qts = _quadTreeDict[layer];
+        return qts.Retrieve(rect);
+    }
+
+    public void Clear()
+    {
+        for(int i = 0; i < _quadTreeList.Count; i++)
+        {
+            _quadTreeList[i].dynamicQT.Clear();
+        }
     }
 
     public void OnDrawGizmos()
