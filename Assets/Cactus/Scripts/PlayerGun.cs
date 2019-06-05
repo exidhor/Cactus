@@ -7,7 +7,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] Transform _gunRoot;
     [SerializeField] AimingLine _aimingLine;
 
-    private void Update()
+    public void Actualize(float dt)
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _aimingLine.Refresh(_gunRoot.position, mousePos);

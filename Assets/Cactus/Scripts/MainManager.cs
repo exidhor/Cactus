@@ -12,4 +12,11 @@ public class MainManager : MonoBehaviour
 
         // to add other stuff
     }
+
+    private void Update()
+    {
+        float dt = Time.deltaTime;
+
+        Player.instance.Actualize(dt);
+    }
 }

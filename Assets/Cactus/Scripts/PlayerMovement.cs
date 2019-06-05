@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float _speed;
 
-    private void Update()
+    public void Actualize(float dt)
     {
         float direction = 0;
 
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
             direction = 1;
         }
 
-        float move = direction * _speed * Time.deltaTime;
+        float move = direction * _speed * dt;
 
         Vector3 pos = transform.position;
         pos.x += move;

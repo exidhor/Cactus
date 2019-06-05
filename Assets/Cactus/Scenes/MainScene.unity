@@ -327,6 +327,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114489959157684886, guid: 3c5cd22aa1079c145ad71c8601393817,
+        type: 2}
+      propertyPath: _layer
+      value: house
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c5cd22aa1079c145ad71c8601393817, type: 2}
   m_IsPrefabAsset: 0
@@ -389,6 +394,11 @@ Prefab:
     - target: {fileID: 1729625445418460, guid: 4e0f90f2f3e7abc46bd8cb458dea0df3, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114337948577208172, guid: 4e0f90f2f3e7abc46bd8cb458dea0df3,
+        type: 2}
+      propertyPath: _layer
+      value: house
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e0f90f2f3e7abc46bd8cb458dea0df3, type: 2}
@@ -478,6 +488,7 @@ GameObject:
   - component: {fileID: 888807885}
   - component: {fileID: 888807884}
   - component: {fileID: 888807886}
+  - component: {fileID: 888807887}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -557,6 +568,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+--- !u!114 &888807887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 888807883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddcfdf9f69e3f4caabed117048824a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movement: {fileID: 888807886}
+  _gun: {fileID: 1680923425}
+  _followThePlayer: {fileID: 519420029}
 --- !u!1 &1050802428
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +707,11 @@ Prefab:
     - target: {fileID: 1287902673816648, guid: ad52d9927c9473549b89f2b48e297bc1, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114616897444989896, guid: ad52d9927c9473549b89f2b48e297bc1,
+        type: 2}
+      propertyPath: _layer
+      value: house
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad52d9927c9473549b89f2b48e297bc1, type: 2}

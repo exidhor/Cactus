@@ -13,7 +13,7 @@ public class FollowThePlayer : MonoBehaviour
         _offset = _player.position - transform.position;
     }
 
-    private void LateUpdate()
+    public void Actualize(float dt)
     {
         transform.position = _player.position - _offset;
     }
