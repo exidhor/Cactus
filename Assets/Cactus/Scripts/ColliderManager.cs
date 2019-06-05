@@ -31,7 +31,7 @@ public class ColliderManager : MonoSingleton<ColliderManager>
 
     public void Register(RectCollider collider, string layer)
     {
-        int index = Peaks(collider.collider.center.x, _chunks);
+        int index = Peaks(collider.rect.center.x, _chunks);
 
         Chunk chunk;
 

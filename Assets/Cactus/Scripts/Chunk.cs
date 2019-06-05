@@ -21,7 +21,7 @@ public class Chunk
         {
             QuadTree<RectCollider> quadTree = collider.isDynamic ? dynamicQT : staticQT;
 
-            quadTree.Insert(collider, collider.collider);
+            quadTree.Insert(collider, collider.rect);
         }
     }
 

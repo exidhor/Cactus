@@ -5,9 +5,9 @@ using Tools;
 
 public class RectCollider : MonoBehaviour, IQTClearable
 {
-    public new Rect collider
+    public new Rect rect
     {
-        get { return _collider; }
+        get { return _rect; }
     }
 
     public string layer
@@ -31,7 +31,7 @@ public class RectCollider : MonoBehaviour, IQTClearable
     [SerializeField] Vector2 _sizeCollider = Vector2.one;
 
     bool _isValid = true;
-    Rect _collider = new Rect();
+    Rect _rect = new Rect();
 
     void OnEnable()
     {
@@ -40,10 +40,10 @@ public class RectCollider : MonoBehaviour, IQTClearable
     
     public Rect RefreshCollider()
     {
-        _collider = GetCollider();
+        _rect = GetCollider();
         ColliderManager.instance.Register(this, _layer);
 
-        return _collider;
+        return _rect;
     }
 
     public Rect GetCollider()
