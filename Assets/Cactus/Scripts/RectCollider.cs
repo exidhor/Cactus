@@ -38,11 +38,6 @@ public class RectCollider : ComponentBuffer, IQTClearable
 
     bool _isValid = true;
     Rect _rect = new Rect();
-
-    void OnEnable()
-    {
-        RefreshCollider();
-    }
     
     public Rect RefreshCollider()
     {

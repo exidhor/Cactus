@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RectCollider))]
-public class TriggerZone : MonoBehaviour
+public class TriggerZone : Collidable
 {
     List<ITriggerable> _triggerables = new List<ITriggerable>();
+
+    public void Init()
+    {
+        _collider.RefreshCollider();
+    }
 
     public void Register(ITriggerable triggerable)
     {

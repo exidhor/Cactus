@@ -87,7 +87,9 @@ public class Chunk
         if (!_quadTreeDict.ContainsKey(layer)) return new List<RectCollider>();
 
         QuadTrees qts = _quadTreeDict[layer];
-        return qts.Retrieve(rect);
+        List<RectCollider> found = qts.Retrieve(rect);
+
+        return found;
     }
 
     public void Clear()
@@ -103,5 +105,10 @@ public class Chunk
         Gizmos.color = Color.green;
 
         Gizmos.DrawWireCube(_bounds.center, _bounds.size);
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + " count=" + _quadTreeList.Count;
     }
 }

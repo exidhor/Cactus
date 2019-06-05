@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RectCollider))]
-public class Interactable : MonoBehaviour, ITriggerable
+public class Interactable : Collidable, ITriggerable
 {
     [SerializeField] TriggerZone _triggerZone;
     [SerializeField] GameObject _event;
 
     bool _isTrigger;
 
-    private void Start()
+    public void Init()
     {
+        _isTrigger = false;
+
         _event.SetActive(false);
+        _triggerZone.Init();
         _triggerZone.Register(this);
+        _collider.RefreshCollider();
     }
 
     public void Trigger()

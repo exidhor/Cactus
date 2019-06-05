@@ -23,7 +23,10 @@ public class House : Decor
             Interactable interactable = InteractableLibrary.instance.GetOne(random);
             interactable.transform.position = _spots[i].position;
 
+            interactable.Init();
             _interactables.Add(interactable);
         }
+
+        _collider.RefreshCollider();
     }
 }

@@ -5,11 +5,10 @@ using Tools;
 
 public class ColliderManager : MonoSingleton<ColliderManager>
 {
-    [SerializeField]
-    List<Chunk> _chunks = new List<Chunk>();
-
-    Chunk _globalChunk;
-
+    [Header("Chunks")]
+    [SerializeField] Chunk _globalChunk;
+    [SerializeField] List<Chunk> _chunks = new List<Chunk>();
+    
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] int _playerChunkPos = 0;
