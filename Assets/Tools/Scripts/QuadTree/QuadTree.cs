@@ -74,6 +74,14 @@ namespace Tools
             return returnObject;
         }
 
+        public void RetrieveNonAlloc(List<T> toFill, Rect rect)
+        {
+            if (_root != null)
+            {
+                _root.RetrieveNonAlloc(toFill, rect);
+            }
+        }
+
         //public void OnBeforeSerialize()
         //{
         //    // todo : from BehaviourWithTree example (see below)

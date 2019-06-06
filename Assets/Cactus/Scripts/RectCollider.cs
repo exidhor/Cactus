@@ -34,6 +34,7 @@ public class RectCollider : ComponentBuffer, IQTClearable
 #if UNITY_EDITOR
     [Header("Gizmos")]
     [SerializeField] Color _gizmosColor = Color.blue;
+    [SerializeField] bool _alwaysDrawGizmos;
 #endif
 
     bool _isValid = true;
@@ -65,8 +66,21 @@ public class RectCollider : ComponentBuffer, IQTClearable
 
     void OnDrawGizmos()
     {
-        Gizmos.color = _gizmosColor;
-        Rect rect = GetCollider();
-        Gizmos.DrawWireCube(rect.center, rect.size);
+        if(_alwaysDrawGizmos)
+        {
+            Gizmos.color = _gizmosColor;
+            Rect rect = GetCollider();
+            Gizmos.DrawWireCube(rect.center, rect.size);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (!_alwaysDrawGizmos)
+        {
+            Gizmos.color = _gizmosColor;
+            Rect rect = GetCollider();
+            Gizmos.DrawWireCube(rect.center, rect.size);
+        }
     }
 }

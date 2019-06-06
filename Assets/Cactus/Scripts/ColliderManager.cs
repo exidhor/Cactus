@@ -8,27 +8,17 @@ public class ColliderManager : MonoSingleton<ColliderManager>
     [Header("Chunks")]
     [SerializeField] Chunk _globalChunk;
     [SerializeField] List<Chunk> _chunks = new List<Chunk>();
-    
+
+    List<RectCollider> _buffer = new List<RectCollider>();
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] int _playerChunkPos = 0;
+
     private void Update()
     {
         float playerX = Player.instance.collider.rect.center.x;
-
-        Chunk c = GetChunk(playerX);
-        int index = -1;
-
-        for(int i = 0; i < _chunks.Count; i++)
-        {
-            if(c == _chunks[i])
-            {
-                index = i;
-                break;
-            }
-        }
-
-        _playerChunkPos = index;
+        _playerChunkPos = Peaks(playerX);
     }
 #endif
 
@@ -54,14 +44,13 @@ public class ColliderManager : MonoSingleton<ColliderManager>
 
     public void Register(RectCollider collider, string layer)
     {
-        Chunk chunk = GetChunk(collider.rect.center.x);
+        int chunkIndex = Peaks(collider.rect.center.x);
+        Chunk chunk = GetChunk(chunkIndex);
         chunk.Add(collider, layer);
     }
 
-    Chunk GetChunk(float x)
+    Chunk GetChunk(int index)
     {
-        int index = Peaks(x, _chunks);
-
         if (index < 0)
         {
             return _globalChunk;
@@ -72,19 +61,19 @@ public class ColliderManager : MonoSingleton<ColliderManager>
         }
     }
 
-    static int Peaks(float posX, List<Chunk> chunks)
+    int Peaks(float posX)
     {
-        if (posX < chunks[0].min.x)
+        if (posX < _chunks[0].min.x)
             return -1;
 
-        if (posX > chunks[chunks.Count - 1].max.x)
+        if (posX > _chunks[_chunks.Count - 1].max.x)
             return -1;
 
-        Vector2i range = new Vector2i(0, chunks.Count - 1);
+        Vector2i range = new Vector2i(0, _chunks.Count - 1);
 
         while (true)
         {
-            range = BinarySearch(posX, range, chunks);
+            range = BinarySearch(posX, range, _chunks);
 
             if (range.x == range.y) return range.x;
             else if (range.x > range.y) return -1;
@@ -159,12 +148,64 @@ public class ColliderManager : MonoSingleton<ColliderManager>
 
     public List<RectCollider> FindCollisions(Rect rect, string layer)
     {
-        Chunk chunk = GetChunk(rect.center.x);
+        int chunkIndex = Peaks(rect.center.x);
 
-        List<RectCollider> found = chunk.Retrieve(rect, layer);
-        FilterCollisions(found, rect);
+        int minLeftIndex = chunkIndex;
+        int maxRightIndex = chunkIndex;
 
-        return found;
+        if (chunkIndex >= 0)
+        {
+            minLeftIndex = FindMinLeftChunk(chunkIndex, rect);
+            maxRightIndex = FindMaxRightChunk(chunkIndex, rect);
+        }
+        
+        _buffer.Clear();
+
+        for (int i = minLeftIndex; i <= maxRightIndex; i++)
+        {
+            Chunk chunk = GetChunk(i);
+            chunk.RetrieveNonAlloc(_buffer, rect, layer);
+        }
+
+        FilterCollisions(_buffer, rect);
+
+        return _buffer;
+    }
+
+    int FindMinLeftChunk(int startIndex, Rect rect)
+    {
+        if (startIndex == 0) return 0;
+
+        int minIndex = startIndex + 1;
+        Chunk chunk;
+
+        do
+        {
+            minIndex--;
+            chunk = GetChunk(minIndex);
+        }
+        while (minIndex > 0 && chunk.min.x > rect.min.x);
+
+        return minIndex;
+    }
+
+    int FindMaxRightChunk(int startIndex, Rect rect)
+    {
+        int last = _chunks.Count - 1;
+
+        if (startIndex == last) return last;
+
+        int maxIndex = startIndex - 1;
+        Chunk chunk;
+
+        do
+        {
+            maxIndex++;
+            chunk = GetChunk(maxIndex);
+        }
+        while (maxIndex <= last && chunk.max.x < rect.max.x);
+
+        return maxIndex;
     }
 
     void FilterCollisions(List<RectCollider> colliders, Rect rect)

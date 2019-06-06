@@ -32,6 +32,12 @@ public class Chunk
 
             return found;
         }
+
+        public void RetrieveNonAlloc(List<RectCollider> toFill, Rect rect)
+        {
+            dynamicQT.RetrieveNonAlloc(toFill, rect);
+            staticQT.RetrieveNonAlloc(toFill, rect);
+        }
     }
 
     public Vector2 center
@@ -90,6 +96,14 @@ public class Chunk
         List<RectCollider> found = qts.Retrieve(rect);
 
         return found;
+    }
+
+    public void RetrieveNonAlloc(List<RectCollider> toFill, Rect rect, string layer)
+    {
+        if (!_quadTreeDict.ContainsKey(layer)) return;
+
+        QuadTrees qts = _quadTreeDict[layer];
+        qts.RetrieveNonAlloc(toFill, rect);
     }
 
     public void Clear()

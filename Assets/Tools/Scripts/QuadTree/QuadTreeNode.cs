@@ -240,5 +240,42 @@ namespace Tools
 
             return returnObjects;
         }
+
+        /*
+         * \brief   Find all potential collisions for specific bounds
+         * \param   a_ReturnObject the list of QTObject in collision
+         *          with the specific bounds.
+         * \param   a_Rect the specific bounds (i.e. the bounds of the
+         *          object we want to test)
+         * \return  the list of collided objects (use for recursive operation),
+         *          which be the same as a_ReturnObjects at the end.
+         */
+        public void RetrieveNonAlloc(List<T> returnObjects, Rect rect)
+        {
+            if (_nodes[0] != null)
+            {
+                int index = GetIndex(rect);
+
+                if (index != -1)
+                {
+                    _nodes[index].RetrieveNonAlloc(returnObjects, rect);
+                }
+                else
+                {
+                    for (int i = 0; i < _nodes.Length; i++)
+                    {
+                        _nodes[i].RetrieveNonAlloc(returnObjects, rect);
+                    }
+                }
+            }
+
+            for(int i = 0; i < _objects.Count; i++)
+            {
+                if(_objects[i].obj.isEnable)
+                {
+                    returnObjects.Add(_objects[i].obj);
+                }
+            }
+        }
     }
 }

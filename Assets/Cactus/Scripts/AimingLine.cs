@@ -5,6 +5,10 @@ using Tools;
 
 public class AimingLine : MonoBehaviour
 {
+    [Header("Infos")]
+    [SerializeField] float _maxRange = 20;
+
+    [Header("Linking")]
     [SerializeField] Transform _line;
 
 #if UNITY_EDITOR
@@ -25,8 +29,8 @@ public class AimingLine : MonoBehaviour
         float angle = Angle(output, output + Vector2.up, target);
         _line.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
 
-        Vector2 endPoint = Vector2.up * 50;
-        endPoint.Rotate(angle);
+        Vector2 endPoint = Vector2.up * _maxRange;
+        endPoint = endPoint.Rotate(angle);
         endPoint += output;
 
 #if UNITY_EDITOR
