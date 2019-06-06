@@ -7,12 +7,29 @@ public class Interactable : Collidable, ITriggerable
 {
     [Header("Infos")]
     [SerializeField] int _life = 1;
+    [SerializeField] int _damage = 1;
+    [SerializeField] float _durationBeforeFire = 1f;
 
     [Header("Linking")]
     [SerializeField] TriggerZone _triggerZone;
     [SerializeField] GameObject _event;
+    [SerializeField] SpriteRenderer _renderer;
 
+    float _startTime;
     bool _isTrigger;
+
+    private void OnEnable()
+    {
+        InteractableManager.instance.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        if(InteractableManager.internalInstance != null)
+        {
+            InteractableManager.instance.Unregister(this);
+        }
+    }
 
     public void Init()
     {
@@ -32,6 +49,8 @@ public class Interactable : Collidable, ITriggerable
         _collider.SetValid(true);
 
         _event.SetActive(true);
+
+        _startTime = Time.time;
     }
 
     public void ReceiveDamage(int damage)
@@ -44,6 +63,20 @@ public class Interactable : Collidable, ITriggerable
         {
             _collider.SetValid(false);
             _event.SetActive(false);
+        }
+    }
+
+    public void Actualize(float dt)
+    {
+        float nt = (Time.time - _startTime) / _durationBeforeFire;
+
+        Color color = Color.Lerp(Color.white, Color.red, nt);
+        _renderer.color = color;
+
+        if(nt >= 1)
+        {
+            Player.instance.ReceiveDamage(_damage);
+            _startTime = Time.time;
         }
     }
 }

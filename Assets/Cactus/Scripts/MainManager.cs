@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
+    [SerializeField] GameObject _youLoseScreen;
+
     [SerializeField] CityBuilder _cityBuilder;
 
     private void Awake()
@@ -11,6 +13,11 @@ public class MainManager : MonoBehaviour
         _cityBuilder.Generate();
 
         // to add other stuff
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     private void Update()
@@ -23,7 +30,21 @@ public class MainManager : MonoBehaviour
 
         // add new colliders to the collider manager
 
-        Player.instance.Actualize(dt);
+        InteractableManager.instance.Actualize(dt);
+
+        if(Player.instance.isAlive)
+        {
+            Player.instance.Actualize(dt);
+        }
+
         TriggerZoneManager.instance.Actualize(dt);
+
+        if (!Player.instance.isAlive)
+        {
+            if(!_youLoseScreen.activeInHierarchy)
+            {
+                _youLoseScreen.SetActive(true);
+            }
+        }
     }
 }

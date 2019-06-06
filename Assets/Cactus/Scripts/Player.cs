@@ -10,6 +10,15 @@ public class Player : MonoSingleton<Player>
         get { return _collider; }
     }
 
+    public bool isAlive
+    {
+        get { return _life > 0; }
+    }
+
+    [Header("Infos")]
+    [SerializeField] int _life = 1;
+
+    [Header("Linking")]
     [SerializeField] PlayerMovement _movement;
     [SerializeField] PlayerGun _gun;
     [SerializeField] FollowThePlayer _followThePlayer;
@@ -22,5 +31,12 @@ public class Player : MonoSingleton<Player>
         _followThePlayer.Actualize(dt);
 
         _collider.RefreshCollider();
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        _life -= damage;
+
+        if (_life < 0) _life = 0;
     }
 }
