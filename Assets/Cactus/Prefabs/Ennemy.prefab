@@ -81,14 +81,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1543672042728448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb769437dea9504a9ffda63e1b834a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 994f71ac07458d5458d4ca1df4f156cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _life: 1
-  _damage: 1
-  _durationBeforeFire: 1
   _triggerZone: {fileID: 114337735529573052}
-  _event: {fileID: 1543672042728448}
+  _damage: 1
+  _durationBeforeFire: 0.8
   _renderer: {fileID: 212115311896210694}
 --- !u!114 &114337735529573052
 MonoBehaviour:

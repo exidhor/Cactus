@@ -5,17 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(RectCollider))]
 public class Interactable : Collidable, ITriggerable
 {
-    [Header("Infos")]
+    [Header("Interactable Infos")]
     [SerializeField] int _life = 1;
-    [SerializeField] int _damage = 1;
-    [SerializeField] float _durationBeforeFire = 1f;
-
-    [Header("Linking")]
+     
+    [Header("Linking for Interactable")]
     [SerializeField] TriggerZone _triggerZone;
-    [SerializeField] GameObject _event;
-    [SerializeField] SpriteRenderer _renderer;
-
-    float _startTime;
+    
     bool _isTrigger;
 
     private void OnEnable()
@@ -31,15 +26,20 @@ public class Interactable : Collidable, ITriggerable
         }
     }
 
+    protected virtual void OnTrigger() { }
+    protected virtual void OnInit() { }
+    protected virtual void OnActualize(float dt) { }
+
     public void Init()
     {
         _isTrigger = false;
 
-        _event.SetActive(false);
         _triggerZone.Init();
         _triggerZone.Register(this);
         _collider.SetValid(false);
         _collider.RefreshCollider();
+
+        OnInit();
     }
 
     public void Trigger()
@@ -50,9 +50,7 @@ public class Interactable : Collidable, ITriggerable
         _triggerZone.Unregister(this);
         _collider.SetValid(true);
 
-        _event.SetActive(true);
-
-        _startTime = Time.time;
+        OnTrigger();
     }
 
     public void ReceiveDamage(int damage)
@@ -61,26 +59,17 @@ public class Interactable : Collidable, ITriggerable
 
         if (_life < 0) _life = 0;
 
-        if(_life == 0)
+        if (_life == 0)
         {
             _collider.SetValid(false);
-            _event.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
     public void Actualize(float dt)
     {
-        if (!GameCamera.instance.viewport.Contains(transform.position)) return;
+        if (!GameCamera.instance.viewport.Overlaps(_collider.rect)) return;
 
-        float nt = (Time.time - _startTime) / _durationBeforeFire;
-
-        Color color = Color.Lerp(Color.white, Color.red, nt);
-        _renderer.color = color;
-
-        if(nt >= 1)
-        {
-            Player.instance.ReceiveDamage(_damage);
-            _startTime = Time.time;
-        }
+        OnActualize(dt);
     }
 }
