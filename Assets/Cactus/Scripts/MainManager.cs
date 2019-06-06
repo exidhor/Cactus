@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
+    [SerializeField] GameObject _AndroidInput;
     [SerializeField] GameObject _youLoseScreen;
 
     [SerializeField] CityBuilder _cityBuilder;
@@ -11,6 +12,12 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         _cityBuilder.Generate();
+
+#if UNITY_ANDROID
+        _AndroidInput.SetActive(true);
+#else
+        _AndroidInput.SetActive(false);
+#endif
 
         // to add other stuff
     }

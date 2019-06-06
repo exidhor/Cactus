@@ -50,7 +50,11 @@ public class RectCollider : ComponentBuffer, IQTClearable
 
     public Rect GetCollider()
     {
-        Vector2 center = _centerCollider + (Vector2)transform.position;
+        Vector2 localCenter = _centerCollider;
+        localCenter.x *= Mathf.Sign(transform.lossyScale.x);
+        localCenter.y *= Mathf.Sign(transform.lossyScale.y);
+
+        Vector2 center = localCenter + (Vector2)transform.position;
         Vector2 size = _sizeCollider;
 
         return new Rect(center.x - size.x / 2,

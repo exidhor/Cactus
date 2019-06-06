@@ -10,7 +10,26 @@ public class PlayerMovement : MonoBehaviour
     {
         float direction = 0;
 
-        if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+#if UNITY_ANDROID
+        int touchCount = Input.touchCount;
+
+        for(int i = 0; i < touchCount; i++)
+        {
+            Touch touch = Input.GetTouch(i);
+
+            Vector2 viewportPosition = Camera.main.ScreenToViewportPoint(touch.position);
+
+            if(viewportPosition.x < 0.15f)
+            {
+                direction = -1;
+            }
+            else if(viewportPosition.x > 0.85f)
+            {
+                direction = 1;
+            }
+        }
+#else
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
         {
             direction = -1;
         }
@@ -18,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = 1;
         }
+#endif
 
         float move = direction * _speed * dt;
 

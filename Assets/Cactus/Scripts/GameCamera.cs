@@ -24,8 +24,16 @@ public class GameCamera : MonoSingleton<GameCamera>
 
     void RefreshViewport()
     {
-        Vector2 minViewport = Camera.main.ViewportToWorldPoint(Vector2.zero);
-        Vector2 maxViewport = Camera.main.ViewportToWorldPoint(Vector2.one);
+#if UNITY_ANDROID
+        Vector2 minPoint = new Vector2(0.15f, 0f);
+        Vector2 maxPoint = new Vector2(0.85f, 1f);
+#else
+        Vector2 minPoint = Vector2.zero;
+        Vector2 maxPoint = Vector2.one;
+#endif
+
+        Vector2 minViewport = Camera.main.ViewportToWorldPoint(minPoint);
+        Vector2 maxViewport = Camera.main.ViewportToWorldPoint(maxPoint);
 
         _viewport = new Rect(minViewport, maxViewport - minViewport);
     }

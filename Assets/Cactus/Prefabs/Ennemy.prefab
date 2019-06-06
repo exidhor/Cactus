@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4387323152388028
 Transform:
   m_ObjectHideFlags: 1
@@ -117,7 +117,7 @@ MonoBehaviour:
   _decor: {fileID: 0}
   _isDynamic: 0
   _layer: interactable
-  _centerCollider: {x: 0.24, y: 0}
+  _centerCollider: {x: 0.24, y: 0.64}
   _sizeCollider: {x: 0.73, y: 1.34}
   _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
   _alwaysDrawGizmos: 1

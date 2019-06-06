@@ -18,10 +18,35 @@ public class PlayerGun : MonoBehaviour
 
     public void Actualize(float dt)
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos;
+        bool shoot;
+
+#if UNITY_ANDROID
+        int touchCount = Input.touchCount;
+
+        for (int i = 0; i < touchCount; i++)
+        {
+            Touch touch = Input.GetTouch(i);
+
+            Vector2 viewportPosition = Camera.main.ScreenToViewportPoint(touch.position);
+
+            if (0.15f < viewportPosition.x && viewportPosition.x < 0.85f)
+            {
+                mousePos = Camera.main.ScreenToWorldPoint(touch.position);
+                shoot = touch.phase == TouchPhase.Began;
+
+                break;
+            }
+        }
+#else
+        shoot = (Input.GetKeyDown(KeyCode.Space));
+
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+#endif
+
         Vector2 endPoint = _aimingLine.Refresh(_gunRoot.position, mousePos);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (shoot)
         {
             RectCollider collider;
 
