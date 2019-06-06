@@ -44,6 +44,8 @@ public class Interactable : Collidable, ITriggerable
 
     public void Trigger()
     {
+        if (!GameCamera.instance.viewport.Contains(transform.position)) return;
+
         _isTrigger = true;
         _triggerZone.Unregister(this);
         _collider.SetValid(true);
@@ -68,6 +70,8 @@ public class Interactable : Collidable, ITriggerable
 
     public void Actualize(float dt)
     {
+        if (!GameCamera.instance.viewport.Contains(transform.position)) return;
+
         float nt = (Time.time - _startTime) / _durationBeforeFire;
 
         Color color = Color.Lerp(Color.white, Color.red, nt);

@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ca12b72dc9c664295be75154765978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  _speed: 4
 --- !u!114 &114679350663409402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddcfdf9f69e3f4caabed117048824a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _life: 1
   _movement: {fileID: 114212977965659378}
   _gun: {fileID: 114893026362990232}
   _followThePlayer: {fileID: 0}
@@ -143,12 +144,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggerZone: {fileID: 0}
+  _interactable: {fileID: 0}
   _player: {fileID: 114679350663409402}
   _decor: {fileID: 0}
   _isDynamic: 1
   _layer: player
   _centerCollider: {x: 0, y: 0}
   _sizeCollider: {x: 0.72, y: 1.81}
+  _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
+  _alwaysDrawGizmos: 0
 --- !u!114 &114893026362990232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0426766f2673249be760e13f62b895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 1
   _gunRoot: {fileID: 4442935964230128}
   _aimingLine: {fileID: 114945969714800314}
 --- !u!114 &114945969714800314
@@ -173,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df07da165bd43504492b2133a979a5ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxRange: 20
   _line: {fileID: 4061004482548290}
 --- !u!212 &212524540554839150
 SpriteRenderer:

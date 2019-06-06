@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4387323152388028
 Transform:
   m_ObjectHideFlags: 1
@@ -84,8 +84,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb769437dea9504a9ffda63e1b834a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _life: 1
+  _damage: 1
+  _durationBeforeFire: 1
   _triggerZone: {fileID: 114337735529573052}
   _event: {fileID: 1543672042728448}
+  _renderer: {fileID: 212115311896210694}
 --- !u!114 &114337735529573052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,6 +121,7 @@ MonoBehaviour:
   _centerCollider: {x: 0.24, y: 0}
   _sizeCollider: {x: 0.73, y: 1.34}
   _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
+  _alwaysDrawGizmos: 1
 --- !u!114 &114750446825927942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,6 +142,7 @@ MonoBehaviour:
   _centerCollider: {x: 0, y: 0}
   _sizeCollider: {x: 4.5, y: 20}
   _gizmosColor: {r: 1, g: 0, b: 0.15690327, a: 1}
+  _alwaysDrawGizmos: 0
 --- !u!212 &212115311896210694
 SpriteRenderer:
   m_ObjectHideFlags: 1

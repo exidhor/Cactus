@@ -24,6 +24,7 @@ public class MainManager : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
+        GameCamera.instance.Actualize(dt);
         ColliderManager.instance.Clear();
 
         // move the world

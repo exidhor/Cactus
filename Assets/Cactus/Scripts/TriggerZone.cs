@@ -24,7 +24,7 @@ public class TriggerZone : Collidable
 
     public void OnTrigger()
     {
-        for(int i = 0; i < _triggerables.Count; i++)
+        for (int i = 0; i < _triggerables.Count; i++)
         {
             _triggerables[i].Trigger();
         }
