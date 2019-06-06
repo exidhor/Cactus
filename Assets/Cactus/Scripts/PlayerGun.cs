@@ -21,7 +21,7 @@ public class PlayerGun : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 endPoint = _aimingLine.Refresh(_gunRoot.position, mousePos);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             RectCollider collider;
 

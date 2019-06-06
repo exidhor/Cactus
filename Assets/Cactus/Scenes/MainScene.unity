@@ -552,6 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835fcb2544c6dfd4a88e05c66f49217a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalChunk:
+    _quadTreeList: []
   _chunks: []
   _playerChunkPos: 0
 --- !u!4 &1050802430
