@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4387323152388028
 Transform:
   m_ObjectHideFlags: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
   _life: 1
   _triggerZone: {fileID: 114337735529573052}
   _damage: 1
-  _durationBeforeFire: 0.8
+  _durationBeforeFire: 1.1
   _renderer: {fileID: 212115311896210694}
 --- !u!114 &114337735529573052
 MonoBehaviour:

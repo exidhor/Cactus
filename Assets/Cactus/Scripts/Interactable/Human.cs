@@ -26,6 +26,7 @@ public class Human : Interactable
         base.OnTrigger();
 
         gameObject.SetActive(true);
+        FacePlayer();
         _startTime = Time.time;
     }
 

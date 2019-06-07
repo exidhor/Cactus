@@ -68,6 +68,7 @@ public class RectCollider : ComponentBuffer, IQTClearable
         _isValid = isValid;
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if(_alwaysDrawGizmos)
@@ -87,4 +88,5 @@ public class RectCollider : ComponentBuffer, IQTClearable
             Gizmos.DrawWireCube(rect.center, rect.size);
         }
     }
+#endif
 }

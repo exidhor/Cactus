@@ -16,13 +16,19 @@ public class PlayerGun : MonoBehaviour
     Rect _boundingBox;
 #endif
 
+#if UNITY_ANDROID
+    Vector2 _oldMousePos;
+#endif
+
     public void Actualize(float dt)
     {
         Vector2 mousePos;
-        bool shoot;
+        bool shoot = false;
 
 #if UNITY_ANDROID
         int touchCount = Input.touchCount;
+
+        mousePos = _oldMousePos;
 
         for (int i = 0; i < touchCount; i++)
         {
@@ -38,6 +44,8 @@ public class PlayerGun : MonoBehaviour
                 break;
             }
         }
+
+        _oldMousePos = mousePos;
 #else
         shoot = (Input.GetKeyDown(KeyCode.Space));
 
@@ -91,9 +99,11 @@ public class PlayerGun : MonoBehaviour
         return false;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(_boundingBox.center, _boundingBox.size);
     }
+#endif
 }

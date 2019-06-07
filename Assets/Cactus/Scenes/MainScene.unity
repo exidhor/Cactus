@@ -308,7 +308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.28975007, y: 0.18100001}
   m_AnchorMax: {x: 0.707, y: 0.34744188}
-  m_AnchoredPosition: {x: 2.5410156, y: -0.7999878}
+  m_AnchoredPosition: {x: 2.5410156, y: -0.8000488}
   m_SizeDelta: {x: -8, y: 0.099998474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259451120
@@ -548,7 +548,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 421048797}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -829,10 +829,6 @@ Prefab:
     - target: {fileID: 4919592806660576, guid: b11eceda312a0c14b8373f627075a55d, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543672042728448, guid: b11eceda312a0c14b8373f627075a55d, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b11eceda312a0c14b8373f627075a55d, type: 2}
@@ -1261,7 +1257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1580428881
 RectTransform:
   m_ObjectHideFlags: 0

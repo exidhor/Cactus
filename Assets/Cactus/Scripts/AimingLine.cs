@@ -55,6 +55,7 @@ public class AimingLine : MonoBehaviour
         return Angle(first, second);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
@@ -62,4 +63,5 @@ public class AimingLine : MonoBehaviour
         Rect rect = MathHelper.ConstructRect(_output, _endPoint);
         Gizmos.DrawWireCube(rect.center, rect.size);
     }
+#endif
 }
